@@ -31,7 +31,7 @@ namespace _Trie
         }
         public char Label
         {
-            get { return Label; }
+            get { return label; }
         }
         public List<TrieNode> Children
         {
