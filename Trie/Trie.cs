@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Trie
+namespace _Trie
 {
-    class TrieNode
+    public class TrieNode
     {
         public TrieNode(char label, bool isFake, List<TrieNode> children)
         {
@@ -48,7 +48,7 @@ namespace Trie
             return AddChild(child);
         }
     }
-    class Trie
+    public class Trie
     {
         TrieNode root;
         public Trie()
@@ -59,6 +59,10 @@ namespace Trie
         public bool IsEmpty
         {
             get { return root.Children.Count == 0; }
+        }
+        public TrieNode Add(string str)
+        {
+            return Add(str.ToList());
         }
         public TrieNode Add(List<char> str)
         {
@@ -78,6 +82,10 @@ namespace Trie
             }
             currentNode.IsFake = false;
             return currentNode;
+        }
+        public bool Find(string str)
+        {
+            return Find(str.ToList());
         }
         public bool Find(List<char> str)
         {
