@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _Trie
 {
-    public class TrieNode
+    public class TrieNode : INode
     {
         public TrieNode(char label, bool isFake, List<TrieNode> children)
         {
@@ -37,6 +37,23 @@ namespace _Trie
         {
             get { return children; }
         }
+
+        string INode.Label
+        {
+            get
+            {
+                return Label.ToString();
+            }
+        }
+
+        List<INode> INode.Children
+        {
+            get
+            {
+                return Children.Cast<INode>().ToList();
+            }
+        }
+
         public TrieNode AddChild(TrieNode child)
         {
             children.Add(child);
@@ -48,7 +65,7 @@ namespace _Trie
             return AddChild(child);
         }
     }
-    public class Trie
+    public class Trie : ITree
     {
         TrieNode root;
         public Trie()
@@ -60,6 +77,23 @@ namespace _Trie
         {
             get { return root.Children.Count == 0; }
         }
+
+        public string Label
+        {
+            get
+            {
+                return root.Label.ToString();
+            }
+        }
+
+        public List<INode> Children
+        {
+            get
+            {
+                return root.Children.Cast<INode>().ToList();
+            }
+        }
+
         public TrieNode Add(string str)
         {
             return Add(str.ToList());
