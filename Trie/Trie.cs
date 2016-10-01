@@ -119,7 +119,14 @@ namespace _Trie
             if (TryFind(str, out node))
             {
                 node.IsFake = true;
+            } else
+            {
+                throw new KeyNotFoundException(str.ToString() + " is not found.");
             }
+        }
+        public void Remove(string str)
+        {
+            Remove(str.ToList());
         }
     }
 }
