@@ -14,7 +14,7 @@ namespace Trie
             this.isFake = isFake;
             if (children == null)
             {
-                children = new List<TrieNode>();
+                this.children = new List<TrieNode>();
             }
             else
             {
@@ -78,6 +78,40 @@ namespace Trie
             }
             currentNode.IsFake = false;
             return currentNode;
+        }
+        public bool Find(List<char> str)
+        {
+            TrieNode t;
+            return TryFind(str, out t);
+        }
+        private bool TryFind(List<char> str, out TrieNode findedNode)
+        {
+            if (str == null) throw new ArgumentException("Finding string is null");
+            if (str.Count == 0) throw new ArgumentException("Count is 0");
+            findedNode = null;
+            TrieNode currentNode = root;
+            foreach (var label in str)
+            {
+                TrieNode nextNode = currentNode.Children.Find(node => node.Label.Equals(label));
+                if (nextNode != null)
+                {
+                    currentNode = nextNode;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            findedNode = currentNode;
+            return !findedNode.IsFake;
+        }
+        public void Remove(List<char> str)
+        {
+            TrieNode node;
+            if (TryFind(str, out node))
+            {
+                node.IsFake = true;
+            }
         }
     }
 }
