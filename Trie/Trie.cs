@@ -42,7 +42,7 @@ namespace _Trie
         {
             get
             {
-                return Label.ToString();
+                return IsFake ? '`' + Label.ToString() : Label.ToString();
             }
         }
 
