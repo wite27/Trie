@@ -17,6 +17,7 @@ namespace _Trie
         {
             InitializeComponent();
             trie = new Trie();
+            this.KeyPreview = true;
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -59,6 +60,15 @@ namespace _Trie
             catch (KeyNotFoundException ke)
             {
                 MessageBox.Show("Key is not found: " + ke.Message);
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonAdd.PerformClick();
+                e.Handled = true;
             }
         }
     }
